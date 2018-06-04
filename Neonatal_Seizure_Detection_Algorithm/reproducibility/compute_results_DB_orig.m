@@ -2,10 +2,10 @@ function [auc, auc_cc,auc1, tdr1, fdr1, tdr2, fdr2, kap, dkap,ddkap,dkap_dist,se
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
 % AUC per patient
-M = size(dec); 
-d4= cell(1,M(1)); % automated annotation
-auc = zeros(1,M(1)); sens=zeros(1,M(1));spec=sens;ppv=sens;npv=sens;
-for ii = 1:M(1)
+MM = size(dec); 
+d4= cell(1,MM(1)); % automated annotation
+auc = zeros(1,MM(1)); sens=zeros(1,MM(1));spec=sens;ppv=sens;npv=sens;
+for ii = 1:MM(1)
     a = annotat_new{ii};
     a = sum(a);  
     if length(find(a==3))>0
@@ -37,9 +37,9 @@ for ii = 1:M(1)
 end
 
 % Event based assessments
-fdr1 = zeros(1,M(1)); tdr1 = fdr1; 
+fdr1 = zeros(1,MM(1)); tdr1 = fdr1; 
 A = []; B = []; C = [];AA=[];
-for ii = 1:M(1)
+for ii = 1:MM(1)
     a = annotat_new{ii};
     a = sum(a);
     aa=a;
@@ -110,7 +110,7 @@ auc_cc = polyarea([0 sp1 1 0], [1 sn1 0 0]);
 % Bootstrapping
 %%%%%%%%%%%%%%%%%%%%%%%
 rng(1);
-ref =  round(rand(1000,M(1))*(M(1)-1))+1;
+ref =  round(rand(1000,MM(1))*(MM(1)-1))+1;
 BB = size(ref); auc1 = zeros(1,1000); 
 for ii = 1:BB(1)    
     % Concatenate annotations and decision values
@@ -149,7 +149,7 @@ end
 kf2 = zeros(1,num); kf3 = kf2; kf4 = kf2;
 for z1 = 1:num
     A = []; B = [];
-for ii = 1:M(1)
+for ii = 1:MM(1)
     d1 = dec{ii}; d2 = d1;
     r1 = find(diff([0 d2 0]) == 1);
     r2 = find(diff([0 d2 0]) == -1);
@@ -181,8 +181,8 @@ ref1 = find(kf2+kf3+kf4==max(kf2+kf3+kf4) , 1, 'last');
 ddkap(1) = kf1-kf2(ref1);
 ddkap(2) = kf1-kf3(ref1);
 ddkap(3) = kf1-kf4(ref1);
-d3 = cell(1, M(1));
-for ii = 1:M(1)
+d3 = cell(1, MM(1));
+for ii = 1:MM(1)
     d1 = dec{ii}; d2 = d1;
     r1 = find(diff([0 d2 0]) == 1);
     r2 = find(diff([0 d2 0]) == -1);
@@ -197,7 +197,7 @@ for ii = 1:M(1)
 end
 
 rng(1);
-ref =  round(rand(1000,M(1))*(M(1)-1))+1;
+ref =  round(rand(1000,MM(1))*(MM(1)-1))+1;
 BB = size(ref); kf1 = zeros(1,1000); df1 = kf1; df2 = kf1; df3 = kf1;
 for ii = 1:BB(1)     
     C = []; D = []; E = []; F = []; 
@@ -230,7 +230,3 @@ dkap(3,:) = quantile(df3, [0.025 0.975]); % substitute E
 dkap_dist(1,:)=df1;
 dkap_dist(2,:)=df2;
 dkap_dist(3,:)=df3;
-
-
-
-
