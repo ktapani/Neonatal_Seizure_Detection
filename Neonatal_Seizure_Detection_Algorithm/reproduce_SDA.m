@@ -10,11 +10,10 @@ if isequal(group,'SDA_DB')
     
 % Other algorithms
 else
-%     fs_orig=256;
-%     % load filters
-%     load hp; load notch_filter
-%     feats=get_features(group,path,hp,Num,Den,fs_orig,n);
-    load(['/media/karoliina/DATADRIVE1/karoliina/eeg_matlab/Directory_for GitHub/neonatal_sez_det/features/feats_',group]);
+    fs_orig=256;
+    % load filters
+    load hp; load notch_filter
+    feats=get_features(group,path,hp,Num,Den,fs_orig,n);
     [dec_raw,dec]=get_decision_values(group,annotat,feats,n,varargin{1});
 end
 % Compute post-processed results
