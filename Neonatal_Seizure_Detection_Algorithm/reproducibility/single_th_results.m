@@ -12,7 +12,7 @@ for ii = 1:M(1)
         dd = conv(dec{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
-    d1 = max(dum);                  % This is my postprocessing stage here
+    d1 = max(dum, [], 1);                  % This is my postprocessing stage here
     d1 = medfilt1(d1,3);
     d2 = [];
     for kk = 1:length(d1)
