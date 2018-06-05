@@ -101,10 +101,10 @@ r2 = r2+cn; r2(r2>length(a1)) = length(a1);
 for z3 = 1:length(r2)
    a1(r1(z3):r2(z3)) = 1;
 end
-sens = length(find(a1==1 & AA==3))/MM1;
-spec = length(find(a1==0 & AA==0))/MM2;
-sn1 = pchip([0 0.5 1], [1 sens 0], xx);
-sp1 = pchip([0 0.5 1], [0 spec 1], xx);
+sns = length(find(a1==1 & AA==3))/MM1;
+spc = length(find(a1==0 & AA==0))/MM2;
+sn1 = pchip([0 0.5 1], [1 sns 0], xx);
+sp1 = pchip([0 0.5 1], [0 spc 1], xx);
 auc_cc = polyarea([0 sp1 1 0], [1 sn1 0 0]);  
 %%%%%%%%%%%%%%%%%%%%%%%
 % Bootstrapping
@@ -134,10 +134,10 @@ for ii = 1:BB(1)
     for z3 = 1:length(r2)
        a1(r1(z3):r2(z3)) = 1;
     end
-    sens = length(find(a1==1 & A==3))/M1;
-    spec = length(find(a1==0 & A==0))/M2;
-    sn1 = pchip([0 0.5 1], [1 sens 0], xx);
-    sp1 = pchip([0 0.5 1], [0 spec 1], xx);
+    sns = length(find(a1==1 & A==3))/M1;
+    spc = length(find(a1==0 & A==0))/M2;
+    sn1 = pchip([0 0.5 1], [1 sns 0], xx);
+    sp1 = pchip([0 0.5 1], [0 spc 1], xx);
     auc1(ii) = polyarea([0 sp1 1 0], [1 sn1 0 0]);      
 end
 
