@@ -1,13 +1,14 @@
 function [sens, spec, ppv, npv,auc] = single_th_results(dec, annotat_new, cn)
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
+M = size(dec); MM = size(dec{1}');
 d4 = cell(1,79); acm = zeros(1,79); auc = acm; %th1 = zeros(1,79);
 val = [];
-for ii = 1:79
+for ii = 1:M(1)
     a = annotat_new{ii};
     a = sum(a);
-   dum = zeros(18, length(dec{ii}{1}));
-   for jj = 1:18
+   dum = zeros(MM(2), length(dec{ii}{1}));
+   for jj = 1:MM(2)
         dd = conv(dec{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
@@ -26,7 +27,7 @@ end
 % annotation
 th = linspace(min(min(val)), max(max(val)),1000); 
      AA = []; C = [];
-for ii = 1:79
+for ii = 1:M(1)
     a = annotat_new{ii};
     a = sum(a);
     d1 = d4{ii};
@@ -42,7 +43,7 @@ end
 kf1 = zeros(1,length(th)); 
 for z1 = 1:length(th)
     A = []; B = [];
-for ii = 1:79
+for ii = 1:M(1)
     d1 = d4{ii}; d2 = zeros(1,length(d1));
     d2(d1>th(z1)) = 1; 
     
@@ -72,7 +73,7 @@ thr = th(ref1);
 
 % evaluate results per baby
 xx = linspace(0,1,1000);
-for ii = 1:79
+for ii = 1:M(1)
    
     a1 = annotat_new{ii};
     a = sum(a1);
