@@ -2,7 +2,7 @@ function [sens, spec, ppv, npv,auc] = single_th_results(dec, annotat_new, cn)
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
 M = size(dec); MM = size(dec{1}');
-d4 = cell(1,79); acm = zeros(1,79); auc = acm; %th1 = zeros(1,79);
+d4 = cell(1,M(1)); acm = zeros(1,M(1)); auc = acm; 
 val = [];
 for ii = 1:M(1)
     a = annotat_new{ii};
