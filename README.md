@@ -6,9 +6,12 @@ This repository contains Matlab code for automated seizure detection for neonata
 
 Neonatal seizure detection algorithms:
 
-SDA - Reference [1]
+SDA - Reference [1] 
+
 SDA_mDB - Reference [1,2,3]
+
 SDA_T - Reference [1,4]
+
 SDA_DB - Reference [1,3]
 
 
