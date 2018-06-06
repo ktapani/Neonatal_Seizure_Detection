@@ -54,7 +54,10 @@ detector
 %fs
 %% Run the algorithm
 [dec, dec_raw, feat] = seizure_detection(filename, format, detector);
-%% 
+
+
+
+%% Seizure detection funtion
 function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,varargin)
  
 addpath(genpath('neonatal_sez_det'))
