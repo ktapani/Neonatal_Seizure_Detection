@@ -1,4 +1,4 @@
-%% Seizure detection algorithm
+%% The original seizure detection algorithm
 
 % This is the main script of the seizure detection algorithm. The user can
 % choose from four different algorithms: SDA, SDA_T, SDA_DB and SDA_DB_mod.
