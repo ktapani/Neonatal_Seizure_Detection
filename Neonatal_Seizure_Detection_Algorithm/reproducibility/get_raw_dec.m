@@ -1,4 +1,4 @@
-function dec=get_raw_dec(norm,feats,SVMs,p)
+function dec=get_raw_dec(norm_val,feats,SVMs,p)
 % labels from annotation (consensus)
 ff_ind=[1:length(feats{p}{1})]';
 dec=cell(length(feats{p}),1);
@@ -10,8 +10,8 @@ for i=1:length(feats{p})
     end
     % normalize features
     ss=size(ff,2);
-    mu=norm{p}(1:ss);
-    sig=norm{p}((ss)+1:end);
+    mu=norm_val{p}(1:ss);
+    sig=norm_val{p}((ss)+1:end);
     val=bsxfun(@rdivide,bsxfun(@minus,ff,mu),sig);
     [ ~,dec{i}] = predict(SVMs{p},val);
     dec{i}=dec{i}(:,2);
