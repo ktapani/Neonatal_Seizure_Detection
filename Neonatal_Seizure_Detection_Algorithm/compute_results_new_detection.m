@@ -1,4 +1,4 @@
-function [auc, tdr1, fdr1] = compute_results(dec, annotat_new, cn)
+function [auc, tdr1, fdr1] = compute_results_new_detection(dec, annotat_new, cn)
 % This function estimates performance measures comparing the SVM
 % output in variable dec, with the annotation single human expert in
 % variable annotat_new for a single recording. Variable cn is the optimal length of the collaring
