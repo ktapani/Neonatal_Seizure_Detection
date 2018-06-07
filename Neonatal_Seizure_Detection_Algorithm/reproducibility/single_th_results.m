@@ -1,18 +1,17 @@
 function [sens, spec, ppv, npv,auc] = single_th_results(dec, annotat_new, cn)
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
-M = size(dec); MM = size(dec{1}');
-d4 = cell(1,M(1)); acm = zeros(1,M(1)); auc = acm; 
+d4 = cell(1,79); acm = zeros(1,79); auc = acm; %th1 = zeros(1,79);
 val = [];
-for ii = 1:M(1)
+for ii = 1:79
     a = annotat_new{ii};
     a = sum(a);
-   dum = zeros(MM(2), length(dec{ii}{1}));
-   for jj = 1:MM(2)
+   dum = zeros(18, length(dec{ii}{1}));
+   for jj = 1:18
         dd = conv(dec{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
-    d1 = max(dum, [], 1);                  % This is my postprocessing stage here
+    d1 = max(dum);                  % This is my postprocessing stage here
     d1 = medfilt1(d1,3);
     d2 = [];
     for kk = 1:length(d1)
@@ -27,7 +26,7 @@ end
 % annotation
 th = linspace(min(min(val)), max(max(val)),1000); 
      AA = []; C = [];
-for ii = 1:M(1)
+for ii = 1:79
     a = annotat_new{ii};
     a = sum(a);
     d1 = d4{ii};
@@ -43,10 +42,10 @@ end
 kf1 = zeros(1,length(th)); 
 for z1 = 1:length(th)
     A = []; B = [];
-for ii = 1:M(1)
+for ii = 1:79
     d1 = d4{ii}; d2 = zeros(1,length(d1));
     d2(d1>th(z1)) = 1; 
-    
+    d2 = check_s_len(d2, 10);
     r1 = find(diff([0 d2 0]) == 1);
     r2 = find(diff([0 d2 0]) == -1);
     r2 = r2+cn; r2(r2>length(d2)) = length(d2);
@@ -73,7 +72,7 @@ thr = th(ref1);
 
 % evaluate results per baby
 xx = linspace(0,1,1000);
-for ii = 1:M(1)
+for ii = 1:79
    
     a1 = annotat_new{ii};
     a = sum(a1);
