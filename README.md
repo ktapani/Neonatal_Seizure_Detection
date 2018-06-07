@@ -31,9 +31,18 @@ Matlab 2017a
 
 ## Description 
 
-Description of the algorithm and prerequisites in more detail can be found in SDA.pdf
+This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of the EEG by the human experts. For details on the 
+
+## Other
+
+Description of the algorithm and prerequisites in more detail can be found in SDA.pdf 
 
 The core file for the neonatal seizure detection is neonatal_seizure_detection.m
+
+Files are currently not optimised for efficient processing. Future releases will significantly speed up the runtime.
+
+SVM model files for the three algorithms are available at DOI: 10.5281/zenodo.1281146
+
 
 ## Built With
 
