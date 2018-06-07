@@ -1,18 +1,18 @@
 # Neonatal_Seizure_Detection
 
-This repository contains Matlab code for automated seizure detection for neonatal EEG. 
+This repository contains Matlab code for automated neonatal EEG seizure detection algorithms (SDA). 
 
 ## Algorithms
 
 Neonatal seizure detection algorithms:
 
-SDA - Reference [1] 
+Proposed SDA - Reference [1] 
 
-SDA_mDB - Reference [1,2,3]
+Modified Deburchgraeve SDA - Reference [1,2,3] (our implementation, trained on our data)
 
-SDA_T - Reference [1,4]
+Temko SDA - Reference [1,4] (our implementation, trained on our data)
 
-SDA_DB - Reference [1,3]
+Deburchgraeve SDA - Reference [1,3] (our implementation)
 
 
 ## EEG file format
@@ -31,18 +31,19 @@ Matlab 2017a
 
 ## Description 
 
-This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of the EEG by the human experts. For details on the 
+This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of EEG by the human experts. For details on the see SDA.pdf.
 
 ## Other
 
-Description of the algorithm and prerequisites in more detail can be found in SDA.pdf 
+More details on the algorithms and prerequisites can be found in SDA.pdf 
 
-The core file for the neonatal seizure detection is neonatal_seizure_detection.m
+The primary file is neonatal_seizure_detection.m
 
 Files are currently not optimised for efficient processing. Future releases will significantly speed up the runtime.
 
-SVM model files for the three algorithms are available at DOI: 10.5281/zenodo.1281146
+SVM model files for the three algorithms are available at DOI: 10.5281/zenodo.1281146 or https://zenodo.org/record/1281146#.WxjW7nVubCI.
 
+The database of neonatal EEG used to develop the algorithms is available at DOI: 10.5281/zenodo.1280684 or https://zenodo.org/record/1280684#.Wxh3QkiFNaQ
 
 ## Built With
 
@@ -58,13 +59,13 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## References
 
-[1] K. Tapani, N. Stevenson and S. Vanhatalo, Time-varying EEG correlations improve neonatal seizure detection (In Press)
+[1] K. Tapani, N. Stevenson and S. Vanhatalo, Time-varying EEG correlations improve neonatal seizure detection, International Journal of Neural Systems. (accepted for publication) 
 
-[2] K. Tapani, S. Vanhatalo and N. Stevenson, Incorpo-rating spike correlations into an SVM-based neonatalseizure detector,EMBEC,652017, pp. 322–325.
+[2] K. Tapani, S. Vanhatalo and N. Stevenson, Incorporating spike correlations into an SVM-based neonatal seizure detector, EMBEC, 2017, pp. 322–325.
 
-[3] W.   Deburchgraeve,   P.   Cherian,   M.   De   Vos,R.  Swarte,  J.  Blok,  G.  Visser,  P.  Govaert  andS.  Van  Huffel,  Automated  neonatal  seizure  detec-tion mimicking a human observer reading EEG,ClinNeurophysiol119(11) (2008) 2447–2454.
+[3] W. Deburchgraeve, P. Cherian, M. De Vos, R. Swarte, J. Blok, G. Visser, P. Govaert and S. Van Huffel, Automated neonatal seizure detection mimicking a human observer reading EEG, Clin Neurophysiol 119(11) (2008) 2447–2454.
 
-[4] A. Temko, E. Thomas, W. Marnane, G. Lightbodyand G. Boylan, EEG-based neonatal seizure detec-tion with support vector machines,Clin Neurophys-iol122(3) (2011) 464–473.
+[4] A. Temko, E. Thomas, W. Marnane, G. Lightbody and G. Boylan, EEG-based neonatal seizure detection with support vector machines, Clin Neurophysiol, 122(3) (2011) 464–473.
 
 ## Contact
 
@@ -78,8 +79,10 @@ or
 
 Nathan Stevenson
 
-University of Helsinki
+University of Helsinki and
+
 QIMR Berghofer Medical Research Institute
 
 email: nathan.stevenson@helsinki.fi
 
+email: nathan.stevenson@QIMRBerghofer.edu.au
