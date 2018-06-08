@@ -39,7 +39,7 @@ More details on the algorithms and prerequisites can be found in SDA.pdf
 
 The primary file is neonatal_seizure_detection.m
 
-To reproduce results presented in [1]
+To reproduce results presented in [1], run original_SDA.m
 
 Files are currently not optimised for efficient processing. Future releases will significantly speed up the runtime.
 
