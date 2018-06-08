@@ -1,13 +1,14 @@
-function [auc1,ref] = auc_ci_concat(dec, annotat_new, cn,num)
+function [auc1,ref] = auc_ci_concat(dec_raw, annotat, cn,num)
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
-d4 = cell(1,79); 
-for ii = 1:79
-    a = annotat_new{ii};
+M = size(dec_raw); MM = size(dec_raw{1}');
+d4 = cell(1,M(1)); 
+for ii = 1:M(1)
+    a = annotat{ii};
     a = sum(a);
-    dum = zeros(18, length(dec{ii}{1}));
-    for jj = 1:18
-        dd = conv(dec{ii}{jj}, ones(1,3))/3;
+    dum = zeros(MM(2), length(dec_raw{ii}{1}));
+    for jj = 1:MM(2)
+        dd = conv(dec_raw{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
 
@@ -29,7 +30,7 @@ th = linspace(min(val(:,1)), max(val(:,2)),num);
 % Bootstrapping
 %%%%%%
 rng(1);
-ref =  round(rand(1000,79)*78)+1;
+ref =  round(rand(1000,M(1))*(M(1)-1))+1;
 BB = size(ref); auc1 = zeros(1,1000); 
 for ii = 1:BB(1)
     % Concatenate annotations and decision values
@@ -38,7 +39,7 @@ for ii = 1:BB(1)
     for jj = 1:length(r1)
         dum = d4{r1(jj)};
         drf =find(isnan(dum)==0);
-        aa = [aa  sum(annotat_new{r1(jj)}(:,drf))];
+        aa = [aa  sum(annotat{r1(jj)}(:,drf))];
         cc = [cc dum(drf)];
     end
     
