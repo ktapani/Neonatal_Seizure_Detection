@@ -1,4 +1,4 @@
-function feats=feats_all32(epoch,fs,hpf)
+function feats=feats_sda(epoch,fs,hpf)
 
 
 %%%%%%%%%%%%%%%%%
