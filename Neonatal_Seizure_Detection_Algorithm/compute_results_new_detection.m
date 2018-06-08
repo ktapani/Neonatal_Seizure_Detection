@@ -16,6 +16,7 @@ function [auc, tdr1, fdr1] = compute_results_new_detection(dec, annotat_new, cn)
 % Steps are mean filter of 3 samples (12s) per channel
 % then maximum across channels
 % then a median filter of 3 samples (12s)
+addpath(genpath('neonatal_sez_det'))
 
 M = size(dec);
 
