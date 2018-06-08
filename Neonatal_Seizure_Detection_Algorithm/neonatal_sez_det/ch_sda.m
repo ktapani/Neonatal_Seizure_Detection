@@ -18,7 +18,7 @@ function feats=ch_sda(sig,sc,len, fs_orig,fs,Num,Den,olap,i,hpf)
             elseif mean(abs(epoch(tt:end)))<10^-4
                 feats_ch{n}=ones(1,21)*NaN;
             else
-                feats_ch{n}=feats_all32(epoch,fs,hpf);
+                feats_ch{n}=feats_sda(epoch,fs,hpf);
             end
         end
         
