@@ -43,7 +43,7 @@
 
 % When filename is class 3:
 % filename='/path_to/eeg.mat';
-% [dec, dec_raw, feat] = seizure_detection(filename, 3, 'SDA_DB', [], fs);
+% dec = seizure_detection(filename, 3, 'SDA_DB', [], fs);
 %% Define inputs here:
 %required input variables:
 filename
