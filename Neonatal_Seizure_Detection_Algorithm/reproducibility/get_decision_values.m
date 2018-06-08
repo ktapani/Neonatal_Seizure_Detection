@@ -1,4 +1,4 @@
-function [dec_raw,dec]=get_decision_values(group,annotat_new,feats,n,varargin)
+function [dec_raw,dec]=get_decision_values(group,annotat,feats,n,varargin)
 
 % SDA
 if isequal(group,'SDA')
@@ -21,13 +21,13 @@ if n~=0
     dec_raw{p}=get_raw_dec(norm_val,feats,SVMs,p);
     disp(p)
     end
-    dec=get_dec(dec_raw, annotat_new, cn);
+    dec=get_dec(dec_raw, annotat, cn);
 else
     for p=1:length(feats)
         dec_raw{p}=get_raw_dec(norm_val,feats,SVMs,p);
         disp(p)
     end
-    dec=get_dec(dec_raw, annotat_new, cn);
+    dec=get_dec(dec_raw, annotat, cn);
 end
 
 end
