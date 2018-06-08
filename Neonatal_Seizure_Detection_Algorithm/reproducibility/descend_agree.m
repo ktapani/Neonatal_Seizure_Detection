@@ -1,14 +1,14 @@
-function [vv1, vv2, vv3,dist] = descend_agree(dec, annotat_new, cn)
-M = size(dec);MM = size(dec{1}');
+function [vv1, vv2, vv3,dist] = descend_agree(dec_raw, annotat, cn)
+M = size(dec_raw);MM = size(dec_raw{1}');
 dist=cell(M(1),1);
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
 d4 = cell(1,M(1)); 
 for ii = 1:M(1)
-    a = annotat_new{ii};
+    a = annotat{ii};
     a = sum(a);
-   dum = zeros(MM(2), length(dec{ii}{1}));
+   dum = zeros(MM(2), length(dec_raw{ii}{1}));
    for jj = 1:MM(2)
-        dd = conv(dec{ii}{jj}, ones(1,3))/3;
+        dd = conv(dec_raw{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
    end
     d1 = max(dum);                  
@@ -37,7 +37,7 @@ for ii = 1:M(1)
        for z3 = 1:length(r2)
            d2(r1(z3):r2(z3)) = 1;
        end     
-          a = annotat_new{ii};
+          a = annotat{ii};
     if length(a)>length(d2);  a = a(:,1:length(d2)); end
     if length(d2)>length(a);  d2 = d2(1:length(a)); end
     d2 = d2(isnan(d1)==0);
@@ -82,7 +82,7 @@ d3 = cell(1,M(1));
         d2 = check_s_len(d2, 10);
         
          for z0 = 1:3 
-          a = annotat_new{ii}(z0,:);
+          a = annotat{ii}(z0,:);
           a = a(:,isnan(d1)==0);
           if length(a)>length(d2);  a = a(:,1:length(d2)); end
           a = check_s_len(a, 10);
@@ -104,9 +104,9 @@ nref1 = 1:M(1);
               
               dum1 = d3{nr1(kk)};
               drf =find(isnan(dum1)==0);
-              C1 = [C1  annotat_new{nr1(kk)}(1,drf)];
-              D1 = [D1 annotat_new{nr1(kk)}(2,drf)];
-              E1 = [E1 annotat_new{nr1(kk)}(3,drf)];
+              C1 = [C1  annotat{nr1(kk)}(1,drf)];
+              D1 = [D1 annotat{nr1(kk)}(2,drf)];
+              E1 = [E1 annotat{nr1(kk)}(3,drf)];
               F1 = [F1 dum1(drf)];
               
         end   
@@ -147,9 +147,9 @@ for z0 = 1:M(1)
     for jj = 1:length(r1)
         dum = d3{r1(jj)};
         drf =find(isnan(dum)==0);
-        C = [C  annotat_new{r1(jj)}(1,drf)];
-        D = [D annotat_new{r1(jj)}(2,drf)];
-        E = [E  annotat_new{r1(jj)}(3,drf)];
+        C = [C  annotat{r1(jj)}(1,drf)];
+        D = [D annotat{r1(jj)}(2,drf)];
+        E = [E  annotat{r1(jj)}(3,drf)];
         F = [F dum(drf)];
     end   
    
