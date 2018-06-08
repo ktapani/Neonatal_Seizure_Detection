@@ -39,6 +39,8 @@ More details on the algorithms and prerequisites can be found in SDA.pdf
 
 The primary file is neonatal_seizure_detection.m
 
+To reproduce results presented in [1]
+
 Files are currently not optimised for efficient processing. Future releases will significantly speed up the runtime.
 
 SVM model files for the three algorithms are available at DOI: 10.5281/zenodo.1281146 or https://zenodo.org/record/1281146#.WxjW7nVubCI.
@@ -59,7 +61,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## References
 
-[1] K. Tapani, N. Stevenson and S. Vanhatalo, Time-varying EEG correlations improve neonatal seizure detection, International Journal of Neural Systems. (accepted for publication) 
+[1] K. Tapani, S. Vanhatalo and N. Stevenson, Time-varying EEG correlations improve automated neonatal seizure detection, International Journal of Neural Systems. (accepted for publication) 
 
 [2] K. Tapani, S. Vanhatalo and N. Stevenson, Incorporating spike correlations into an SVM-based neonatal seizure detector, EMBEC, 2017, pp. 322–325.
 
