@@ -1,7 +1,7 @@
-function [auc, auc1, acc1, tdr1, fdr1, tdr2, fdr2, kap, dkap, kap1, dkap_dist, thr1] = compute_results_NJS(dec, annotat_new, cn)
+function [auc, auc1, acc1, tdr1, fdr1, tdr2, fdr2, kap, dkap, kap1, dkap_dist, thr1] = compute_results_NJS(dec_raw, annotat, cn)
 % This function estimates a raft of performance measures comparing the SVM
-% output in variable dec, with the annotations of the human expert in
-% variable annotat_new. Variable cn is the optimal length of the collaring
+% output in variable dec_raw, with the annotations of the human expert in
+% variable annotat. Variable cn is the optimal length of the collaring
 % extension
 %
 %  auc1 - is the auc of all recording concatenated together 1x1
@@ -24,15 +24,15 @@ function [auc, auc1, acc1, tdr1, fdr1, tdr2, fdr2, kap, dkap, kap1, dkap_dist, t
 % then maximum across channels
 % then a median filter of 3 samples (12s)
 
-M = size(dec); MM = size(dec{1}');
+M = size(dec_raw); MM = size(dec_raw{1}');
 d4 = cell(1,M(1)); %acm = zeros(1,M(1)); auc = acm; %th1 = zeros(1,M(1));
 val = zeros(M(1),2); 
 for ii = 1:M(1)
-    a = annotat_new{ii};
+    a = annotat{ii};
     a = sum(a);
-    dum = zeros(MM(2), length(dec{ii}{1})); % Post processing
+    dum = zeros(MM(2), length(dec_raw{ii}{1})); % Post processing
     for jj = 1:MM(2)
-        dd = conv(dec{ii}{jj}, ones(1,3))/3;
+        dd = conv(dec_raw{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
     d1 = max(dum, [], 1);          % Post processing or max(dum); ???
@@ -53,7 +53,7 @@ acc1 = zeros(length(th),M(1)); fdr1 = acc1; tdr1 = fdr1;  spec = acc1; sens = ac
 for z1 = 1:length(th)
     A = []; B = []; C = [];
 for ii = 1:M(1)
-    a = annotat_new{ii};
+    a = annotat{ii};
     a = sum(a);
     d1 = d4{ii}; d2 = zeros(1,length(d1));  
     d2(d1>th(z1)) = 1; 
@@ -153,7 +153,7 @@ for ii = 1:M(1)
        for z3 = 1:length(r2)
            d2(r1(z3):r2(z3)) = 1;
        end     
-          a = annotat_new{ii};
+          a = annotat{ii};
     if length(a)>length(d2);  a = a(:,1:length(d2)); end
     if length(d2)>length(a);  d2 = d2(1:length(a)); end
     d2 = d2(isnan(d1)==0);
@@ -201,9 +201,9 @@ for ii = 1:BB(1)
     for jj = 1:length(r1)
         dum = d3{r1(jj)};
         drf =find(isnan(dum)==0);
-        C = [C  annotat_new{r1(jj)}(1,drf)];
-        D = [D annotat_new{r1(jj)}(2,drf)];
-        E = [E  annotat_new{r1(jj)}(3,drf)];
+        C = [C  annotat{r1(jj)}(1,drf)];
+        D = [D annotat{r1(jj)}(2,drf)];
+        E = [E  annotat{r1(jj)}(3,drf)];
         F = [F dum(drf)];
     end   
     A = [C' D' E'];
