@@ -1,4 +1,4 @@
-function [auc, auc_cc,auc1, tdr1, fdr1, tdr2, fdr2, kap, dkap,ddkap,dkap_dist,sens,spec,ppv,npv] = compute_results_DB_orig(dec, annotat_new, cn,num)
+function [auc, auc_cc,auc1, tdr1, fdr1, tdr2, fdr2, kap, dkap,ddkap,dkap_dist,sens,spec,ppv,npv] = compute_results_DB_orig(dec, annotat, cn,num)
 
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
 % AUC per patient
@@ -6,7 +6,7 @@ MM = size(dec);
 d4= cell(1,MM(1)); % automated annotation
 auc = zeros(1,MM(1)); sens=zeros(1,MM(1));spec=sens;ppv=sens;npv=sens;
 for ii = 1:MM(1)
-    a = annotat_new{ii};
+    a = annotat{ii};
     a = sum(a);  
     if length(find(a==3))>0
         xx = linspace(0,1,1000);
@@ -40,7 +40,7 @@ end
 fdr1 = zeros(1,MM(1)); tdr1 = fdr1; 
 A = []; B = []; C = [];AA=[];
 for ii = 1:MM(1)
-    a = annotat_new{ii};
+    a = annotat{ii};
     a = sum(a);
     aa=a;
     d1 = dec{ii}; d2 = d1;
@@ -119,7 +119,7 @@ for ii = 1:BB(1)
     for jj = 1:length(r1)
         dum = dec{r1(jj)};
         drf =find(isnan(dum)==0);
-        aa = [aa  sum(annotat_new{r1(jj)}(:,drf))];
+        aa = [aa  sum(annotat{r1(jj)}(:,drf))];
         cc = [cc dum(drf)];
     end  
     A = aa;
@@ -157,7 +157,7 @@ for ii = 1:MM(1)
     for z3 = 1:length(r2)
        d2(r1(z3):r2(z3)) = 1;
     end     
-    a = annotat_new{ii};
+    a = annotat{ii};
     if length(a)>length(d2);  a = a(:,1:length(d2)); end
     if length(d2)>length(a);  d2 = d2(1:length(a)); end
     d2 = d2(isnan(d1)==0);
@@ -205,9 +205,9 @@ for ii = 1:BB(1)
     for jj = 1:length(r1)
         dum = d3{r1(jj)};
         drf =find(isnan(dum)==0);
-        C = [C  annotat_new{r1(jj)}(1,drf)];
-        D = [D annotat_new{r1(jj)}(2,drf)];
-        E = [E  annotat_new{r1(jj)}(3,drf)];
+        C = [C  annotat{r1(jj)}(1,drf)];
+        D = [D annotat{r1(jj)}(2,drf)];
+        E = [E  annotat{r1(jj)}(3,drf)];
         F = [F dum(drf)];
     end
     A = [C' D' E'];
