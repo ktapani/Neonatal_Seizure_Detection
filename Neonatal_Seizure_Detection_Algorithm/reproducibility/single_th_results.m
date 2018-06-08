@@ -1,14 +1,15 @@
-function [sens, spec, ppv, npv,auc] = single_th_results(dec, annotat_new, cn)
+function [sens, spec, ppv, npv,auc] = single_th_results(dec_raw, annotat, cn)
 
+M = size(dec); MM = size(dec{1}');
 % CHANGE THE SVM OUTPUT INTO A BINARY DECISION
-d4 = cell(1,79); acm = zeros(1,79); auc = acm; %th1 = zeros(1,79);
+d4 = cell(1,M(1)); acm = zeros(1,M(1)); auc = acm; %th1 = zeros(1,79);
 val = [];
-for ii = 1:79
-    a = annotat_new{ii};
+for ii = 1:M(1)
+    a = annotat{ii};
     a = sum(a);
-   dum = zeros(18, length(dec{ii}{1}));
-   for jj = 1:18
-        dd = conv(dec{ii}{jj}, ones(1,3))/3;
+   dum = zeros(MM(2), length(dec_raw{ii}{1}));
+   for jj = 1:MM(2)
+        dd = conv(dec_raw{ii}{jj}, ones(1,3))/3;
         dum(jj, :) = dd(2:end-1);
     end
     d1 = max(dum);                  % This is my postprocessing stage here
@@ -26,8 +27,8 @@ end
 % annotation
 th = linspace(min(min(val)), max(max(val)),1000); 
      AA = []; C = [];
-for ii = 1:79
-    a = annotat_new{ii};
+for ii = 1:M(1)
+    a = annotat{ii};
     a = sum(a);
     d1 = d4{ii};
     a = a(isnan(d1)==0);
@@ -42,7 +43,7 @@ end
 kf1 = zeros(1,length(th)); 
 for z1 = 1:length(th)
     A = []; B = [];
-for ii = 1:79
+for ii = 1:M(1)
     d1 = d4{ii}; d2 = zeros(1,length(d1));
     d2(d1>th(z1)) = 1; 
     d2 = check_s_len(d2, 10);
@@ -52,7 +53,7 @@ for ii = 1:79
     for z3 = 1:length(r2)
        d2(r1(z3):r2(z3)) = 1;
     end     
-    a = annotat_new{ii};
+    a = annotat{ii};
     if length(a)>length(d2);  a = a(:,1:length(d2)); end
     if length(d2)>length(a);  d2 = d2(1:length(a)); end
     d2 = d2(isnan(d1)==0);
@@ -72,9 +73,9 @@ thr = th(ref1);
 
 % evaluate results per baby
 xx = linspace(0,1,1000);
-for ii = 1:79
+for ii = 1:M(1)
    
-    a1 = annotat_new{ii};
+    a1 = annotat{ii};
     a = sum(a1);
     
     d1 = d4{ii};
