@@ -1,4 +1,4 @@
-function dec=compute_raw_dec(norm_val,feat,SVM)
+function dec_raw=compute_raw_dec(norm_val,feat,SVM)
 
 ss=length(feat{1}{1});
 mu=norm_val(1:ss);
@@ -11,7 +11,7 @@ for i=1:length(feat)
     end
     % normalize features
     val=bsxfun(@rdivide,bsxfun(@minus,ff,mu),sig);
-    [ ~,dec{i}] = predict(SVM,val);
-    dec{i}=dec{i}(:,2);
+    [ ~,dec_raw{i}] = predict(SVM,val);
+    dec_raw{i}=dec_raw{i}(:,2);
 end
 
