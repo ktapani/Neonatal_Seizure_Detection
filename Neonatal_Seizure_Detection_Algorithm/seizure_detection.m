@@ -1,5 +1,11 @@
+%% Seizure detection funtion
+function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,varargin)
+
 % A function that implements several seizure detection algorithms on the EEG
-%
+% 
+% Run the algorithm
+% [dec, dec_raw, feat] = seizure_detection(filename, format, detector);
+
 % INPUTS:
 
 % filename is either:
@@ -44,22 +50,20 @@
 % When filename is class 3:
 % filename='/path_to/eeg.mat';
 % dec = seizure_detection(filename, 3, 'SDA_DB', [], fs);
-%% Define inputs here:
-%required input variables:
-filename
-format
-detector
-%optional input variables:
-%model_file_path
-%fs
-%% Run the algorithm
-[dec, dec_raw, feat] = seizure_detection(filename, format, detector);
+% Define inputs here:
+% required input variables:
+%   filename
+%   format
+%   detector
+% optional input variables:
+%   model_file_path
+%   fs
+%
+% Karoliina Tapani and Nathan Stevenson
+% Aalto University and University of Helsinki, Finland
+% June 2018
 
 
-
-%% Seizure detection funtion
-function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,varargin)
- 
 addpath(genpath('neonatal_sez_det'))
 
 if isequal(detector,'SDA_DB')
