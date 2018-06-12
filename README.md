@@ -31,11 +31,11 @@ Matlab 2017a
 
 ## Description 
 
-This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of EEG by the human experts. For details on the see SDA.pdf.
+This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of EEG by the human experts. For details on the see Instructions_For_Use.pdf (to be uploaded).
 
 ## Other
 
-More details on the algorithms and prerequisites can be found in SDA.pdf 
+More details on the algorithms and prerequisites can be found in Instructions_For_Use.pdf 
 
 The primary file is neonatal_seizure_detection.m
 
@@ -73,7 +73,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 Karoliina Tapani
 
-Aalto University School of Science
+Aalto University, Finland
 
 email: karoliina.tapani@aalto.fi
 
@@ -81,9 +81,9 @@ or
 
 Nathan Stevenson
 
-University of Helsinki and
+University of Helsinki, Finland and
 
-QIMR Berghofer Medical Research Institute
+QIMR Berghofer Medical Research Institute, Australia
 
 email: nathan.stevenson@helsinki.fi
 
