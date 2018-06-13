@@ -1,4 +1,4 @@
-function [dec_raw,dec]=get_decision_values(group,annotat,feats,n,varargin)
+function [dec_raw,dec]=get_decision_values(group,annotat,feats,n)
 
 % SDA
 if isequal(group,'SDA')
@@ -11,7 +11,7 @@ elseif isequal(group,'SDA_DB_mod')
     cn=28;    
 end
 
-load(varargin{1})
+load(['svm_',group])
 
 dec_raw=cell(length(feats),1);
 
