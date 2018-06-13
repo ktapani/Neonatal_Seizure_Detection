@@ -1,4 +1,4 @@
-function [auc, tdr1, fdr1] = compute_results_new_detection(dec_raw, annotat, cn)
+function [auc, tdr1, fdr1] = compute_results_new_detection(dec_raw, annotat, detector)
 % This function estimates performance measures comparing the SVM
 % output in variable dec, with the annotation single human expert in
 % variable annotat_new for a single recording. Variable cn is the optimal length of the collaring
@@ -17,6 +17,17 @@ function [auc, tdr1, fdr1] = compute_results_new_detection(dec_raw, annotat, cn)
 % then maximum across channels
 % then a median filter of 3 samples (12s)
 addpath(genpath('neonatal_sez_det'))
+
+% SDA
+if isequal(detector,'SDA')
+    cn=23;
+% SDA_T
+elseif isequal(detector,'SDA_T')
+    cn=7;
+% SDA_DB_mod
+elseif isequal(detector,'SDA_DB_mod')
+    cn=28;    
+end
 
 M = size(dec_raw);
 
