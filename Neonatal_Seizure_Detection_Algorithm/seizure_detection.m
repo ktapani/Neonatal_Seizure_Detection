@@ -24,10 +24,7 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % OPTIONAL INPUTS:
 
-% model_file_path
-% MUST BE DEFINED if detector is: SDA, SDA_DB_mod or SDA_T
-% is the path to a matlab variable including 1) the model file used to implement the SVM, 
-% 2) the normalization values for the features and 3) the threshold for the decision
+% fs - MUST be defined with format 3
 
 % OUTPUTS:
 
@@ -40,8 +37,7 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % When filename is class 1: 
 % filename='/path_to/eeg1.edf'
-% model_file='/neonatal_sez_det/fullSVMs/fullSVM_SDA.mat';
-% [dec, dec_raw, feat] = seizure_detection(filename, 1, 'SDA',  model_file);
+% [dec, dec_raw, feat] = seizure_detection(filename, 1, 'SDA');
 
 % When filename is class 2:
 % filename='/path_to/eeg_data_file1001.edf';
@@ -49,14 +45,13 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % When filename is class 3:
 % filename='/path_to/eeg.mat';
-% dec = seizure_detection(filename, 3, 'SDA_DB', [], fs);
+% dec = seizure_detection(filename, 3, 'SDA_DB', fs);
 % Define inputs here:
 % required input variables:
 %   filename
 %   format
 %   detector
 % optional input variables:
-%   model_file_path
 %   fs
 %
 % Karoliina Tapani and Nathan Stevenson
@@ -74,15 +69,15 @@ elseif isequal(detector,'SDA') || isequal(detector,'SDA_T') || isequal(detector,
     % compute features
     load('notch_filter');
     load('hp');
-    if format==3 && length(varargin)==2
-        feat=compute_features(format,detector,filename,hp,Num,Den,varargin{2});
+    if format==3 && length(varargin)==1
+        feat=compute_features(format,detector,filename,hp,Num,Den,varargin{1});
     elseif format==1 || format==2
         feat=compute_features(format,detector,filename,hp,Num,Den);
     else
         disp('Invalid format or variable "fs" missing')
     end
     % compute binary annotation (dec) and raw decision values (dec_raw)
-    load(varargin{1})
+    load(['fullSVM_',detector])
     [dec,dec_raw]=compute_decision_values(detector,feat,mdlSVM,norm_val,thr);
     
 else
