@@ -1,4 +1,4 @@
-function [auc, tdr1, fdr1] = compute_results_new_detection(dec, annotat_new, cn)
+function [auc, tdr1, fdr1] = compute_results_new_detection(dec_raw, annotat, cn)
 % This function estimates performance measures comparing the SVM
 % output in variable dec, with the annotation single human expert in
 % variable annotat_new for a single recording. Variable cn is the optimal length of the collaring
@@ -18,11 +18,11 @@ function [auc, tdr1, fdr1] = compute_results_new_detection(dec, annotat_new, cn)
 % then a median filter of 3 samples (12s)
 addpath(genpath('neonatal_sez_det'))
 
-M = size(dec);
+M = size(dec_raw);
 
-dum = zeros(length(dec), length(dec{1})); % Post processing
-for jj = 1:length(dec)
-    dd = conv(dec{jj}, ones(1,3))/3;
+dum = zeros(length(dec_raw), length(dec_raw{1})); % Post processing
+for jj = 1:length(dec_raw)
+    dd = conv(dec_raw{jj}, ones(1,3))/3;
     dum(jj, :) = dd(2:end-1);
 end
 d1 = max(dum);                  % Post processing
@@ -42,7 +42,7 @@ acc1 = zeros(length(th),M(1)); fdr1 = acc1; tdr1 = fdr1;  spec = acc1; sens = ac
 
 for z1 = 1:length(th)
     d2 = zeros(1,length(d4));  
-    a = annotat_new;
+    a = annotat;
     d2(d4>th(z1)) = 1; 
     d2 = check_s_len(d2, 10);       % eliminate detections less than 10s  
     r1 = find(diff([0 d2 0]) == 1);  % this is the collaring process (extend detection for cn seconds)
