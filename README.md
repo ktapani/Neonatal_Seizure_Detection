@@ -6,13 +6,13 @@ This repository contains Matlab code for automated neonatal EEG seizure detectio
 
 Neonatal seizure detection algorithms:
 
-Proposed SDA - Reference [1] 
+Proposed SDA (SDA) - Reference [1] 
 
-Modified Deburchgraeve SDA - Reference [1,2,3] (our implementation, trained on our data)
+Modified Deburchgraeve SDA (SDA_DB_mod) - Reference [1,2,3] (our implementation, trained on our data)
 
-Temko SDA - Reference [1,4] (our implementation, trained on our data)
+Temko SDA (SDA_T) - Reference [1,4] (our implementation, trained on our data)
 
-Deburchgraeve SDA - Reference [1,3] (our implementation)
+Deburchgraeve SDA (SDA_DB) - Reference [1,3] (our implementation)
 
 
 ## EEG file format
