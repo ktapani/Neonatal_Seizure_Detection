@@ -33,6 +33,12 @@ Matlab 2017a
 
 This repository contains the Matlab code associated with our recent publication [1]. It contains several algorithms for the detection of neonatal seizure from the EEG. It also contains methods of comparing the algorithm output to the annotation of EEG by the human experts. For details on the see Instructions_For_Use.pdf (to be uploaded).
 
+## Techincal notes
+
+The algorithm includes a notch filter on 50Hz. If the user’s EEG signal has a DC component different to 50Hz, the EEG should be preprocessed with a corresponding notch filter before running the algorithm.
+
+The processing times with the most accurate algorithm (SDA) are long and therefore, users are strongly adviced to use parallelization (optional input n for number of parallel pools)
+
 ## Other
 
 More details on the algorithms and prerequisites can be found in Instructions_For_Use.pdf 
