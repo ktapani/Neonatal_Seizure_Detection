@@ -36,9 +36,9 @@ function [dec,results,dec_raw,feats]=reproduce_SDA(group,path,annotat,n)
 
 %% Compute decision values, binary output and performance measures
 addpath(genpath('reproducibility'))
+addpath(genpath('neonatal_sez_det'))
 % Original Deburchgraeve algorithm
 if isequal(group,'SDA_DB')
-    addpath(genpath('neonatal_sez_det'))
     disp('Binary decision computed for patients:')
     dec=db_algorithm(path,n);
     
@@ -56,6 +56,8 @@ if isequal(group,'SDA_DB')
 else
     results=get_results(group,annotat,dec_raw);
 end
+
+
 
 delete(gcp('nocreate'))
 end

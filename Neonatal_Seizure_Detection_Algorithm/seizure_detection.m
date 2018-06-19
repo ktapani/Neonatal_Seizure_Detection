@@ -1,5 +1,5 @@
 %% Seizure detection funtion
-function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,varargin)
+function [dec, dec_raw, feat] = seizure_detection(filename, format, detector, n, varargin)
 
 % A function that implements several seizure detection algorithms on the EEG
 % 
@@ -24,7 +24,10 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % OPTIONAL INPUTS:
 
-% fs - MUST be defined with format 3
+% model_file_path
+% MUST BE DEFINED if detector is: SDA, SDA_DB_mod or SDA_T
+% is the path to a matlab variable including 1) the model file used to implement the SVM, 
+% 2) the normalization values for the features and 3) the threshold for the decision
 
 % OUTPUTS:
 
@@ -37,7 +40,8 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % When filename is class 1: 
 % filename='/path_to/eeg1.edf'
-% [dec, dec_raw, feat] = seizure_detection(filename, 1, 'SDA');
+% model_file='/neonatal_sez_det/fullSVMs/fullSVM_SDA.mat';
+% [dec, dec_raw, feat] = seizure_detection(filename, 1, 'SDA',  model_file);
 
 % When filename is class 2:
 % filename='/path_to/eeg_data_file1001.edf';
@@ -45,46 +49,68 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector,var
 
 % When filename is class 3:
 % filename='/path_to/eeg.mat';
-% dec = seizure_detection(filename, 3, 'SDA_DB', fs);
+% dec = seizure_detection(filename, 3, 'SDA_DB', [], fs);
 % Define inputs here:
 % required input variables:
 %   filename
 %   format
 %   detector
 % optional input variables:
+% %   model_file_path
 %   fs
 %
 % Karoliina Tapani and Nathan Stevenson
 % Aalto University and University of Helsinki, Finland
 % June 2018
-
-
-addpath(genpath('neonatal_sez_det'))
-
-if isequal(detector,'SDA_DB')
-    
-    dec=DB_algorithm_original(filename,format);
-
-elseif isequal(detector,'SDA') || isequal(detector,'SDA_T') || isequal(detector,'SDA_DB_mod')
-    % compute features
-    load('notch_filter');
-    load('hp');
-    if format==3 && length(varargin)==1
-        feat=compute_features(format,detector,filename,hp,Num,Den,varargin{1});
-    elseif format==1 || format==2
-        feat=compute_features(format,detector,filename,hp,Num,Den);
-    else
-        disp('Invalid format or variable "fs" missing')
-    end
-    % compute binary annotation (dec) and raw decision values (dec_raw)
-    load(['fullSVM_',detector])
-    [dec,dec_raw]=compute_decision_values(detector,feat,mdlSVM,norm_val,thr);
-    
+if format==3 && isempty(varargin)
+    disp('Input variable "fs" missing')
+    dec=[];
 else
-    disp('Invalid detector')
-end
+    addpath(genpath('neonatal_sez_det'))
 
+    if isequal(detector,'SDA_DB')
+        if format==3 && length(varargin)==1
+            disp('Starting to compute binary annotation with SDA_DB-algorithm')
+            dec=DB_algorithm_original(filename,format,varargin{1});
+            disp('Binary decision done')
+        else
+            disp('Starting to compute binary annotation with SDA_DB-algorithm')
+            dec=DB_algorithm_original(filename,format);
+            disp('Binary decision done')
+        end
+    elseif isequal(detector,'SDA') || isequal(detector,'SDA_T') || isequal(detector,'SDA_DB_mod')
+        % compute features
+        load('notch_filter');
+        load('hp');
+        if format==3 && length(varargin)==1
+            feat=compute_features(n,format,detector,filename,hp,Num,Den,varargin{1});
+        elseif format==1 || format==2
+            feat=compute_features(n,format,detector,filename,hp,Num,Den);
+        end
+        % compute binary annotation (dec) and raw decision values (dec_raw)
+        load(['fullSVM_',detector])
+        [dec,dec_raw]=compute_decision_values(detector,feat,mdlSVM,norm_val,thr,n);
+
+    else
+        disp('Invalid detector')
+    end
+
+end
 end
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
