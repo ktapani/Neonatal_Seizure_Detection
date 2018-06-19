@@ -15,7 +15,6 @@ for kk = 1:length(d1)
 end
   
 d1 = d2;
-d1 = d1(isnan(d1)==0);    
 
 a1 = zeros(1, length(d1));
 a1(d1>thr) = 1;

@@ -163,7 +163,7 @@ ref3 = find(f>=8 & f<12);
 ref4 = find(f>=12 & f<30);
 f1(1) = sum(nspec([ref1 ref2 ref3 ref4]).^2)/N; 
 % envelope amplitude
-f1(2)=mean(abs(hilbert(epoch)));
+f1(2)=mean(abs(hilbert(epoch4)));
 feats=[feats f1];
 
 end
