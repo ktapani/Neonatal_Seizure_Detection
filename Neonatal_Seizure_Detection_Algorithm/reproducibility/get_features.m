@@ -10,32 +10,15 @@ else
     fs=64;len = 32;olap=28;
 end
 if isequal(group,'SDA_DB')~=1
-    if n~=0
-        parpool(n)
-        feats=cell(1);
-        disp('Features computed for patients:')
-        parfor p=1:n_patients
-                try             
-                feats{p}=read_eeg(exam_names{p},path,hp,group,len,olap,fs,Num,Den,fs_orig);
-                catch ME
-                    disp(['Error feats ',num2str(p)]) 
-                    disp(ME)    
-                end 
-                disp(p)
-        end
-    else
-        disp('Parallelization not used')
-        feats=cell(1);
-        disp('Features computed for patients:')
-        for p=1:n_patients
-            try             
-            feats{p}=read_eeg(exam_names{p},path,hp,group,len,olap,fs,Num,Den,fs_orig);
-            catch ME
-                disp(['Error feats ',num2str(p)]) 
-                disp(ME)    
-            end 
-            disp(p)
-        end  
-    end
-
+    feats=cell(1);
+    disp('Features computed for patients:')
+    for p=1:n_patients
+        try             
+        feats{p}=read_eeg(exam_names{p},path,hp,group,len,olap,fs,Num,Den,fs_orig,n);
+        catch ME
+            disp(['Error feats ',num2str(p)]) 
+            disp(ME)    
+        end 
+        disp(p)
+    end  
 end
