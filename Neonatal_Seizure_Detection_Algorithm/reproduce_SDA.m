@@ -18,7 +18,7 @@ function [dec,results,dec_raw,feats]=reproduce_SDA(group,path,annotat,n)
 % group - The SDA implementation of choice
 % path - path to the edf-files
 % annotat - load the annotation file
-% n -  choose the number of parallel pools (recommended to use as many as possible, if no parallelization in use, define n=0)
+% n -  choose the number of parallel pools (recommended to use as many as possible, if no parallelization in use, define n=1)
 
 
 %% Options for group:
