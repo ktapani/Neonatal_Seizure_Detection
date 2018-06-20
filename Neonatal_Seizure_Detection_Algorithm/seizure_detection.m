@@ -22,6 +22,9 @@ function [dec, dec_raw, feat] = seizure_detection(filename, format, detector, n,
 % detector 
 % is a string containing 4 potential values - SDA, SDA_DB_mod, SDA_T, SDA_DB
 
+% n
+% is a scalar denoting the number of cores to run the algorithm on. If multiple cores are not available, define n=1
+
 % OPTIONAL INPUTS:
 
 % model_file_path
