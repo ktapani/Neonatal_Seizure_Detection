@@ -15,7 +15,7 @@ load(['svm_',group])
 
 dec_raw=cell(length(feats),1);
 disp('Raw decision values computed for patients:')
-if n~=0
+if n>1
     pp=gcp;
     if pp.Connected~=1
         parpool(n)
