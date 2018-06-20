@@ -1,13 +1,13 @@
 function feats=features_per_ch(n,sig,sc,len, fs_orig,fs,hpf,Num,Den,olap,detector)
 
 
-if n~=0 && isequal(detector,'SDA')==1
+if n>1 && isequal(detector,'SDA')==1
     feats=feats_parfor_SDA(n,sig,sc,len,fs_orig,fs,Num,Den,olap,hpf);
     
-elseif n~=0 && isequal(detector,'SDA_T')==1 
+elseif n>1 && isequal(detector,'SDA_T')==1 
     feats=feats_parfor_SDA_T(n,sig,sc,len,fs_orig,fs,Num,Den,olap);
     
-elseif n~=0 && isequal(detector,'SDA_DB_mod')==1 
+elseif n>1 && isequal(detector,'SDA_DB_mod')==1 
     feats=feats_parfor_SDA_DB_mod(n,sig,sc,len,fs_orig,fs,Num,Den,olap);
     
 else
