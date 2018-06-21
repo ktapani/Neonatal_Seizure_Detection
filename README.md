@@ -39,6 +39,11 @@ The algorithm includes a notch filter on 50Hz. If the user’s EEG signal has a 
 
 The processing times with the most accurate algorithm (SDA) are long and therefore, users are strongly adviced to use parallelization (optional input n for number of parallel pools)
 
+## Additional Dependencies
+
+The algorithm utilizes an additional external function to show progress of the algorithm:
+https://se.mathworks.com/matlabcentral/fileexchange/22161-waitbar-with-time-estimation
+
 ## Other
 
 More details on the algorithms and prerequisites can be found in Instructions_For_Use.pdf 
