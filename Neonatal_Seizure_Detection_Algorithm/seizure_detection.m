@@ -72,6 +72,10 @@ else
     addpath(genpath('neonatal_sez_det'))
 
     if isequal(detector,'SDA_DB')
+        if n>1
+            disp('No parallelization needed with SDA_DB')
+            disp('Continuing with single core')
+        end
         if format==3 && length(varargin)==1
             disp('Starting to compute binary annotation with SDA_DB-algorithm')
             dec=DB_algorithm_original(filename,format,varargin{1});
