@@ -1,6 +1,7 @@
 # Neonatal_Seizure_Detection
 
 This repository contains Matlab code for automated neonatal EEG seizure detection algorithms (SDA). 
+See instructions_of_use.pdf for more details.
 
 ## Algorithms
 
