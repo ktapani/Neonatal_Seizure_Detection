@@ -49,7 +49,7 @@ val = [min(d2) max(d2)] ;% get range of outputs
 % values include sensitivity, specificty, seizure detection rate and false
 % alarms per hour
 th = linspace(min(min(val)), max(max(val)), 1000); % changed from 1000
-acc1 = zeros(length(th),M(1)); fdr1 = acc1; tdr1 = fdr1;  spec = acc1; sens = acc1;
+acc1 = zeros(length(th),1); fdr1 = acc1; tdr1 = fdr1;  spec = acc1; sens = acc1;
 
 for z1 = 1:length(th)
     d2 = zeros(1,length(d4));  
